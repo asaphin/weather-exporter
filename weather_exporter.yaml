@@ -1,0 +1,5 @@
+openWeatherMap:
+  apiKey: "apiKey"
+  location:
+    lat: 40.0
+    lon: 30.0

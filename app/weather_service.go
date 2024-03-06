@@ -21,7 +21,9 @@ func (w *WeatherService) UpdateWeatherData() {
 	metrics.RegisterPressure(weather.Pressure, weather.LocationName)
 	metrics.RegisterHumidity(weather.Humidity, weather.LocationName)
 	metrics.RegisterWindSpeed(weather.WindSpeed, weather.LocationName)
-	metrics.RegisterWindDiretion(weather.WindDirection, weather.LocationName)
+	metrics.RegisterWindDirection(weather.WindDirection, weather.LocationName)
+	metrics.RegisterCloudsAll(weather.CloudsAll, weather.LocationName)
+	metrics.RegisterRainOneHour(weather.RainOneHour, weather.LocationName)
 }
 
 func NewWeatherService(client WeatherClient, lat, lon float64) *WeatherService {

@@ -9,4 +9,6 @@ type Weather struct {
 	Humidity      float64
 	WindSpeed     float64
 	WindDirection float64
+	CloudsAll     float64
+	RainOneHour   float64
 }

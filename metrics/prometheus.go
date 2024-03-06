@@ -8,6 +8,8 @@ type metrics struct {
 	humidity      *prometheus.GaugeVec
 	windSpeed     *prometheus.GaugeVec
 	windDirection *prometheus.GaugeVec
+	cloudsAll     *prometheus.GaugeVec
+	rainOneHour   *prometheus.GaugeVec
 }
 
 var m = &metrics{
@@ -36,6 +38,16 @@ var m = &metrics{
 		Help: "Current wind direction in Degrees (Azimuth)",
 	},
 		[]string{"location"}),
+	cloudsAll: prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Name: "clouds_all",
+		Help: "Cloudiness in Percents",
+	},
+		[]string{"location"}),
+	rainOneHour: prometheus.NewGaugeVec(prometheus.GaugeOpts{
+		Name: "rain_1h",
+		Help: "Rain volume for the last 1 hour in mm",
+	},
+		[]string{"location"}),
 }
 
 func Initialize() {
@@ -45,6 +57,8 @@ func Initialize() {
 		m.humidity,
 		m.windSpeed,
 		m.windDirection,
+		m.cloudsAll,
+		m.rainOneHour,
 	)
 }
 
@@ -64,6 +78,14 @@ func RegisterWindSpeed(windSpeed float64, locationName string) {
 	m.windSpeed.WithLabelValues(locationName).Set(windSpeed)
 }
 
-func RegisterWindDiretion(windDirection float64, locationName string) {
+func RegisterWindDirection(windDirection float64, locationName string) {
 	m.windDirection.WithLabelValues(locationName).Set(windDirection)
+}
+
+func RegisterCloudsAll(cloudsAll float64, locationName string) {
+	m.cloudsAll.WithLabelValues(locationName).Set(cloudsAll)
+}
+
+func RegisterRainOneHour(rainOneHour float64, locationName string) {
+	m.rainOneHour.WithLabelValues(locationName).Set(rainOneHour)
 }

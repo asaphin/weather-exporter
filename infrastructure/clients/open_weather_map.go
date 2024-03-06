@@ -15,6 +15,7 @@ type CurrentWeatherDTO struct {
 	Main        MainWeather        `json:"main"`
 	Visibility  float64            `json:"visibility"`
 	Wind        Wind               `json:"wind"`
+	Rain        Rain               `json:"rain"`
 	Clouds      Clouds             `json:"clouds"`
 	Dt          int                `json:"dt"`
 	System      LocationSystemData `json:"sys"`
@@ -50,8 +51,12 @@ type Wind struct {
 	Deg   float64 `json:"deg"`
 }
 
+type Rain struct {
+	OneHour float64 `json:"1h"`
+}
+
 type Clouds struct {
-	All int `json:"all"`
+	All float64 `json:"all"`
 }
 
 type LocationSystemData struct {
@@ -100,6 +105,8 @@ func (c *OpenWeatherMapClient) GetWeather(lat, lon float64) (*domain.Weather, er
 		Humidity:      weather.Main.Humidity,
 		WindSpeed:     weather.Wind.Speed,
 		WindDirection: weather.Wind.Deg,
+		RainOneHour:   weather.Rain.OneHour,
+		CloudsAll:     weather.Clouds.All,
 	}, nil
 }
 

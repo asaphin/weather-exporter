@@ -18,4 +18,4 @@ COPY --from=builder /app/weather_exporter.yml /etc/weather_exporter/weather_expo
 
 EXPOSE 9110
 
-CMD ["./weather_exporter", "-config", "/etc/weather_exporter/weather_exporter.yml"]
+CMD ./weather_exporter -config=/etc/weather_exporter/weather_exporter.yml

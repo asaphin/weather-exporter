@@ -1,0 +1,9 @@
+metricsEndpoint: "/metrics"
+
+serverPort: ":9110"
+
+openWeatherMap:
+  apiKey: "apiKey"
+  location:
+    lat: 45
+    lon: 38

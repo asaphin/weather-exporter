@@ -72,15 +72,19 @@ func (c *OpenWeatherMapClient) GetWeather(lat, lon float64) (*domain.Weather, er
 
 	response, err := http.Get(apiURL)
 	if err != nil {
-		fmt.Println("Error making the request:", err)
+		fmt.Println("error making the request:", err)
 		return nil, err
 	}
 	defer response.Body.Close()
 
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
-		fmt.Println("Error reading the response body:", err)
+		fmt.Println("error reading the response body:", err)
 		return nil, err
+	}
+
+	if response.StatusCode != 200 {
+		return nil, fmt.Errorf("response status %d: %s", response.StatusCode, string(body))
 	}
 
 	weather := CurrentWeatherDTO{}
